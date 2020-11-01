@@ -7,19 +7,19 @@ public class VideoDataModel {
     private final String videoId;
     private final String videoDate;
 
-    public VideoDataModel(String videoLink, String videoTitle, String videoCreator, String videoDate) {
-        this.videoDescr = videoLink;
+    public VideoDataModel(String videoTitle, String videoDescr, String videoLink, String videoDate) {
         this.videoTitle = videoTitle;
-        this.videoId = videoCreator;
+        this.videoDescr = videoDescr;
+        this.videoId = videoLink;
         this.videoDate = videoDate;
-    }
-
-    public String getVideoDescr() {
-        return videoDescr;
     }
 
     public String getVideoTitle() {
         return videoTitle;
+    }
+
+    public String getVideoDescr() {
+        return videoDescr;
     }
 
     public String getVideoId() {

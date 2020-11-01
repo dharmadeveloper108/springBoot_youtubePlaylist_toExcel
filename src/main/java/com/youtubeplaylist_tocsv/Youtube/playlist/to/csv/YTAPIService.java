@@ -34,18 +34,17 @@ public class YTAPIService {
                 }
                 JSONObject jsonObject = new JSONObject(response.substring(0));
                 JSONArray arrResponse = (JSONArray) jsonObject.get("items");
-//                JSONObject o = arrResponse.toJSONObject(arrResponse);
-//                JSONArray arrItems = (JSONArray) o.get("snippet");
 
                 for(int i=0; i<arrResponse.length(); i++){
 
                     String snippet = arrResponse.getJSONObject(i).getString("snippet");
+                    JSONObject jsonSnippet = new JSONObject(snippet);
 
                     VideoDataModel video = new VideoDataModel(
-                            snippet,
-                            snippet,
-                            snippet,
-                            snippet);
+                            jsonSnippet.getString("title"),
+                            jsonSnippet.getString("description"),
+                            jsonSnippet.getString("description"),
+                            jsonSnippet.getString("publishedAt"));
                     videoList.add(video);
                 }
                 in.close();
