@@ -3,7 +3,6 @@ package com.youtubeplaylist_tocsv.Youtube.playlist.to.csv;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +14,7 @@ import java.util.List;
 public class YTAPIService {
 
     public static List<VideoDataModel> GetPlaylistData (String playlistid) throws IOException, JSONException {
-            URL url = new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2C+id&playlistId="
+            URL url = new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2C+id&maxResults=500&playlistId="
                     + playlistid +"&key=" +
                     APIAuthKey.YOUTUBEAPI_KEY);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -39,11 +38,13 @@ public class YTAPIService {
 
                     String snippet = arrResponse.getJSONObject(i).getString("snippet");
                     JSONObject jsonSnippet = new JSONObject(snippet);
+                    String resourceId = jsonSnippet.getString("resourceId");
+                    JSONObject jsonvideoId = new JSONObject(resourceId);
 
                     VideoDataModel video = new VideoDataModel(
                             jsonSnippet.getString("title"),
                             jsonSnippet.getString("description"),
-                            jsonSnippet.getString("description"),
+                            jsonvideoId.getString("videoId"),
                             jsonSnippet.getString("publishedAt"));
                     videoList.add(video);
                 }
