@@ -2,32 +2,32 @@ package com.youtubeplaylist_tocsv.Youtube.playlist.to.csv;
 
 public class VideoDataModel {
 
-    private final String videoTitle;
-    private final String videoDescr;
-    private final String videoId;
-    private final String videoDate;
+    private final String title;
+    private final String description;
+    private final String id;
+    private final String date;
 
-    public VideoDataModel(String videoTitle, String videoDescr, String videoLink, String videoDate) {
-        this.videoTitle = videoTitle;
-        this.videoDescr = videoDescr;
-        this.videoId = videoLink;
-        this.videoDate = videoDate;
+    public VideoDataModel(String title, String description, String id, String date) {
+        this.title = title;
+        this.description = description;
+        this.id = id;
+        this.date = date;
     }
 
-    public String getVideoTitle() {
-        return videoTitle;
+    public String getTitle() {
+        return title;
     }
 
-    public String getVideoDescr() {
-        return videoDescr;
+    public String getDescr() {
+        return description;
     }
 
-    public String getVideoId() {
-        return videoId;
+    public String getId() {
+        return id;
     }
 
-    public String getVideoDate() {
-        return videoDate;
+    public String getDate() {
+        return date;
     }
 
 }

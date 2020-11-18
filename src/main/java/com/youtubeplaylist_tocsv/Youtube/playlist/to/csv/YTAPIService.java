@@ -49,11 +49,10 @@ public class YTAPIService {
                     videoList.add(video);
                 }
                 in.close();
-                return videoList;
             } else {
                 response.append("Something went wrong :(");
                 System.out.println(response);
-                return videoList;
             }
+        return videoList;
     }
 }
