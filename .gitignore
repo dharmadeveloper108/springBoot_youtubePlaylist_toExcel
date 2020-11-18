@@ -35,3 +35,6 @@ build/
 !**/src/main/resources/application.properties
 /src/test/
 /src/main/java/com/youtubeplaylist_tocsv/Youtube/playlist/to/csv/APIAuthKey.java
+/src/main/resources/application.properties
+/src/test/
+*.properties
