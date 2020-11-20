@@ -18,7 +18,7 @@ public class YTAPIService {
     public static List<VideoDataModel> GetPlaylistData (String playlistid) throws IOException, JSONException {
             URL url = new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2C+id&maxResults=500&playlistId="
                     + playlistid +"&key=" +
-                    APIAuthKey.YOUTUBEAPI_KEY);
+                    KEY);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
