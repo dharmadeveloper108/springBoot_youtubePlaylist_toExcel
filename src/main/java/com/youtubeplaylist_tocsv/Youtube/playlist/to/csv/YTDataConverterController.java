@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
-//@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*")
 @RequestMapping("api/youtubeData/getVideos")
 @RestController
 public class YTDataConverterController {
