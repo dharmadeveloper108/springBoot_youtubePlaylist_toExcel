@@ -30,18 +30,22 @@ public class ExcelWriter {
 		Row header = sheet.createRow(0);
 
 		Cell headerCell = header.createCell(0);
-		headerCell.setCellValue("Title");
+		headerCell.setCellValue("Thumbnail Url");
 		headerCell.setCellStyle(headerStyle);
 
 		headerCell = header.createCell(1);
-		headerCell.setCellValue("Description");
+		headerCell.setCellValue("Title");
 		headerCell.setCellStyle(headerStyle);
 
 		headerCell = header.createCell(2);
-		headerCell.setCellValue("Id");
+		headerCell.setCellValue("Description");
 		headerCell.setCellStyle(headerStyle);
 
 		headerCell = header.createCell(3);
+		headerCell.setCellValue("Id");
+		headerCell.setCellStyle(headerStyle);
+
+		headerCell = header.createCell(4);
 		headerCell.setCellValue("Date");
 		headerCell.setCellStyle(headerStyle);
 
@@ -49,18 +53,22 @@ public class ExcelWriter {
 			Row row = sheet.createRow(i+1);
 
 			Cell cell = row.createCell(0);
-			cell.setCellValue(videoDataModelList.get(i).getTitle());
+			cell.setCellValue(videoDataModelList.get(i).getThumbnailUrl());
 			cell.setCellStyle(style);
 
 			cell = row.createCell(1);
-			cell.setCellValue(videoDataModelList.get(i).getDescr());
+			cell.setCellValue(videoDataModelList.get(i).getTitle());
 			cell.setCellStyle(style);
 
 			cell = row.createCell(2);
-			cell.setCellValue(videoDataModelList.get(i).getId());
+			cell.setCellValue(videoDataModelList.get(i).getDescr());
 			cell.setCellStyle(style);
 
 			cell = row.createCell(3);
+			cell.setCellValue(videoDataModelList.get(i).getId());
+			cell.setCellStyle(style);
+
+			cell = row.createCell(4);
 			cell.setCellValue(videoDataModelList.get(i).getDate());
 			cell.setCellStyle(style);
 		}

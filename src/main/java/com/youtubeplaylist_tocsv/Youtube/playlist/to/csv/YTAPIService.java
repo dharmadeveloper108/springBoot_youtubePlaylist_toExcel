@@ -18,7 +18,7 @@ public class YTAPIService {
     public static List<VideoDataModel> GetPlaylistData (String playlistid) throws IOException, JSONException {
             URL url = new URL("https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2C+id&maxResults=500&playlistId="
                     + playlistid +"&key=" +
-                    KEY);
+                    APIAuthKey.YOUTUBEAPI_KEY);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
             int responseCode = con.getResponseCode();
@@ -40,6 +40,15 @@ public class YTAPIService {
 
                     String snippet = arrResponse.getJSONObject(i).getString("snippet");
                     JSONObject jsonSnippet = new JSONObject(snippet);
+
+                    JSONObject jsonThumbnailUrl = null;
+                    String thumbnails = jsonSnippet.getString("thumbnails");
+                    JSONObject jsonThumbnails = new JSONObject(thumbnails);
+                    if(jsonThumbnails.has("high")) {
+                        String thumbnailUrl = jsonThumbnails.getString("high");
+                        jsonThumbnailUrl = new JSONObject(thumbnailUrl);
+                    }
+//
                     String resourceId = jsonSnippet.getString("resourceId");
                     JSONObject jsonvideoId = new JSONObject(resourceId);
 
@@ -47,7 +56,8 @@ public class YTAPIService {
                             jsonSnippet.getString("title"),
                             jsonSnippet.getString("description"),
                             jsonvideoId.getString("videoId"),
-                            jsonSnippet.getString("publishedAt"));
+                            jsonSnippet.getString("publishedAt"),
+                            (jsonThumbnails.has("high")) ? jsonThumbnailUrl.getString("url") : "");
                     videoList.add(video);
                 }
                 in.close();
