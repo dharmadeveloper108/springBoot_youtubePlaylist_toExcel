@@ -21,6 +21,11 @@ public class YTDataConverterController {
         return YTAPIService.GetPlaylistData(playlistId.substring(3));
     }
 
+    @GetMapping(path = "/singleVideo/{id}")
+    public SingleVideoModel getSingleVideoData(@PathVariable("id") String videoId) throws GeneralSecurityException, IOException, JSONException {
+        return YTAPIService.GetVideoData(videoId.substring(3));
+    }
+
     @GetMapping(path = "/toExcel")
     public void writeDataToExcel(@NonNull @RequestBody String playlistId) throws IOException, JSONException {
         List<VideoDataModel> videoDataModelList = YTAPIService.GetPlaylistData(playlistId);

@@ -67,4 +67,51 @@ public class YTAPIService {
             }
         return videoList;
     }
+
+    public static SingleVideoModel GetVideoData (String videoId) throws IOException, JSONException {
+        URL url = new URL("https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&id="
+                + videoId +"&key=" +
+                KEY);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        int responseCode = con.getResponseCode();
+        StringBuffer response = new StringBuffer();
+        List<String> videoTags = new ArrayList<>();
+        SingleVideoModel video = null;
+
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    con.getInputStream()));
+            String inputLine;
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            JSONObject jsonObject = new JSONObject(response.substring(0));
+            JSONArray arrResponse = (JSONArray) jsonObject.get("items");
+
+            for(int i=0; i<arrResponse.length(); i++){
+
+                String snippet = arrResponse.getJSONObject(i).getString("snippet");
+                JSONObject jsonSnippet = new JSONObject(snippet);
+
+                String tags = jsonSnippet.getString("tags");
+                JSONArray jsonTags = new JSONArray(tags);
+
+                for (int j = 0; j < jsonTags.length(); j++) {
+                    videoTags.add(jsonTags.getString(j));
+                }
+
+                video = new SingleVideoModel(videoTags,
+                        jsonSnippet.getString("channelTitle"),
+                        jsonSnippet.getString("defaultAudioLanguage"));
+            }
+            in.close();
+
+        } else {
+            response.append("Something went wrong :(");
+            System.out.println(response);
+        }
+        return video;
+    }
 }
